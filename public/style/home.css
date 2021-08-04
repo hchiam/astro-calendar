@@ -47,6 +47,12 @@ td {
 .month-text {
   font-size: x-small;
   font-weight: bold;
+  font-style: italic;
   color: lightgrey;
   float: right;
+  opacity: 0.5;
+}
+
+.first-day-of-month {
+  outline: 2px solid;
 }

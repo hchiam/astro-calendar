@@ -1,21 +1,20 @@
+import { useState } from "react";
+
 import Month from "./Month";
 
 export default function Calendar() {
   const today = new Date();
-  // const firstDayOfNextMonth = getNthDayOfNextMonth(1, today);
-
-  // function getNthDayOfNextMonth(n: number, date: Date) {
-  //   if (date.getMonth() == 11) {
-  //     return new Date(date.getFullYear() + 1, 0, n);
-  //   } else {
-  //     return new Date(date.getFullYear(), date.getMonth() + 1, n);
-  //   }
-  // }
-
+  const [numberOfMonths, setNumberOfMonths] = useState(4);
   return (
     <>
-      <Month firstDate={today} numberOfMonths={2} />
-      {/* <Month firstDate={firstDayOfNextMonth} /> */}
+      {/* <input
+        type="number"
+        value={numberOfMonths}
+        min="1"
+        step="1"
+        onChange={(e) => setNumberOfMonths(e.target.value)}
+      /> */}
+      <Month firstDate={today} numberOfMonths={numberOfMonths} />
     </>
   );
 }

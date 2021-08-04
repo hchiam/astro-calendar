@@ -16,18 +16,16 @@ export default function Month(props) {
   const startMonthName = sundayThisWeek
     .toLocaleString("default", { month: "short" })
     .replace(".", "");
-  const dates = getNextMonth(sundayThisWeek);
-  if (numberOfMonths && numberOfMonths > 1) {
-    const nextDate = new Date();
-    nextDate.setDate(dates[dates.length - 1].getDate() + 1);
-    dates.push(...getNextMonth(nextDate));
-  }
+  const dates = getNextMonth(sundayThisWeek, numberOfMonths);
   const weeks = getWeeks(dates);
 
-  function getNextMonth(startDateInclusive: Date): Date[] {
+  function getNextMonth(
+    startDateInclusive: Date,
+    numberOfMonths: number = 1
+  ): Date[] {
     const dates: Date[] = [];
     const thisYear = startDateInclusive.getFullYear();
-    const thisMonth = startDateInclusive.getMonth() + 1;
+    const thisMonth = startDateInclusive.getMonth() + numberOfMonths;
     const lastDay = new Date(thisYear, thisMonth, 0);
     let nextDate = startDateInclusive;
     dates.push(new Date(nextDate.getTime()));
@@ -50,7 +48,7 @@ export default function Month(props) {
 
   return (
     <div>
-      <h2>{startMonthName.toUpperCase()}</h2>
+      {!numberOfMonths && <h2>{startMonthName.toUpperCase()}</h2>}
       <table>
         <thead>
           <tr>
@@ -80,7 +78,10 @@ export default function Month(props) {
                     );
                   }
                   return (
-                    <td key={generateNextID()}>
+                    <td
+                      className={dayOfMonth === 1 && "first-day-of-month"}
+                      key={generateNextID()}
+                    >
                       {dayOfMonth}&nbsp;{monthText}
                     </td>
                   );
