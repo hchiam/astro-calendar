@@ -4,6 +4,7 @@
 import Heading from '../components/Heading.astro';
 import Calendar from '../components/Calendar.tsx';
 import Line from '../components/Line.svelte';
+import StatHolidaysLink from '../components/StatHolidaysLink.astro'
 
 const title: string = 'Astro-powered Calendar';
 ---
@@ -22,10 +23,14 @@ const title: string = 'Astro-powered Calendar';
     </style>
 </head>
 <body>
-    <Heading/>
-    <Line/>
     <main>
+        <Heading/>
+        <Line/>
         <Calendar client:visible/>
+        <br>
+        <h3>
+            <StatHolidaysLink/>
+        </h3>
     </main>
 </body>
 </html>
