@@ -1,16 +1,9 @@
+import { useEffect, useContext } from "react";
+
 import Bubbles from "./Bubbles";
 import WeeklyWednesdays from "./WeeklyWednesdays";
-
-let iterator;
-
-function generateNextID() {
-  function* generator() {
-    let number = 0;
-    while (true) yield `id-${number++}`;
-  }
-  iterator = iterator ?? generator();
-  return iterator.next().value;
-}
+import { generateNextID } from "../helpers/GenerateNextID";
+import { StatHolidaysContext, getStatHolidayName } from "./StatHolidays";
 
 export default function Month(props) {
   const { firstDate, numberOfMonths } = props;
@@ -21,6 +14,8 @@ export default function Month(props) {
     .replace(".", "");
   const dates = getNextMonth(sundayThisWeek, numberOfMonths);
   const weeks = getWeeks(dates);
+
+  const statHolidays = useContext(StatHolidaysContext);
 
   function getNextMonth(
     startDateInclusive: Date,
@@ -92,6 +87,13 @@ export default function Month(props) {
                     );
                   }
 
+                  const holidayName = getStatHolidayName(date, statHolidays);
+                  const holidayNote = holidayName ? (
+                    <span className="holiday-name">{holidayName}</span>
+                  ) : (
+                    <></>
+                  );
+
                   return (
                     <td
                       className={dayOfMonth === 1 ? "first-day-of-month" : ""}
@@ -101,6 +103,7 @@ export default function Month(props) {
                       <Bubbles number={8} />
                       &nbsp;{monthText}
                       {wednesdayNote}
+                      {holidayNote}
                     </td>
                   );
                 })}

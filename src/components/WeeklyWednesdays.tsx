@@ -1,3 +1,5 @@
+import { generateNextID } from "../helpers/GenerateNextID";
+
 interface WeeklyWednesdays {
   date: Date;
 }
@@ -13,9 +15,17 @@ export default function WeeklyWednesdays(props) {
   const isFiveText = addBrackets("TGRNF");
   const isFourText = addBrackets("TRNF");
   if (isFive === true) {
-    return <span className="weekly-wednesdays">{isFiveText}</span>;
+    return (
+      <span className="weekly-wednesdays" key={generateNextID()}>
+        {isFiveText}
+      </span>
+    );
   } else if (isFour === true) {
-    return <span className="weekly-wednesdays">{isFourText}</span>;
+    return (
+      <span className="weekly-wednesdays" key={generateNextID()}>
+        {isFourText}
+      </span>
+    );
   } else {
     return <></>;
   }
@@ -27,7 +37,9 @@ function addBrackets(string: string) {
       {string.split("").map((letter) => (
         <>
           {"["}
-          <span className="letter">{letter}</span>
+          <span className="letter" key={generateNextID()}>
+            {letter}
+          </span>
           {"]"}
         </>
       ))}

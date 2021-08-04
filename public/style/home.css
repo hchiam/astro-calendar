@@ -50,6 +50,11 @@ td {
   vertical-align: top;
 }
 
+.first-day-of-month {
+  outline: 2px solid;
+  position: relative;
+}
+
 .month-text {
   font-size: x-small;
   font-weight: bold;
@@ -58,11 +63,6 @@ td {
   opacity: 0.5;
   position: absolute;
   right: 1px;
-}
-
-.first-day-of-month {
-  outline: 2px solid;
-  position: relative;
 }
 
 .bubble {
@@ -81,4 +81,13 @@ td {
   vertical-align: 0rem;
   text-decoration: underline overline 0.15em;
   text-underline-offset: 0.15em;
+}
+
+.holiday-name {
+  display: block;
+  font-size: x-small;
+  opacity: 0.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

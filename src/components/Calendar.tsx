@@ -1,6 +1,8 @@
 import { useState } from "react";
 
+import { generateNextID } from "../helpers/GenerateNextID";
 import Month from "./Month";
+import StatHolidaysWrapper from "../components/StatHolidays";
 
 export default function Calendar() {
   const today = new Date();
@@ -14,7 +16,14 @@ export default function Calendar() {
         step="1"
         onChange={(e) => setNumberOfMonths(e.target.value)}
       /> */}
-      <Month firstDate={today} numberOfMonths={numberOfMonths} />
+
+      <StatHolidaysWrapper>
+        <Month
+          firstDate={today}
+          numberOfMonths={numberOfMonths}
+          key={generateNextID()}
+        />
+      </StatHolidaysWrapper>
     </>
   );
 }
