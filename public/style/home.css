@@ -51,7 +51,7 @@ td {
 }
 
 .first-day-of-month {
-  outline: 2px solid;
+  outline: 2px solid red;
   position: relative;
 }
 
@@ -90,4 +90,5 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: red;
 }
