@@ -34,7 +34,7 @@ export default function StatHolidaysWrapper(props) {
   }, []);
   return (
     <StatHolidaysContext.Provider value={statHolidays}>
-      {props.children}
+      {statHolidays.length ? props.children : <h2>Fetching holidays...</h2>}
     </StatHolidaysContext.Provider>
   );
 }
