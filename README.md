@@ -1,10 +1,6 @@
 # Calendar built with Astro
 
-<https://github.com/hchiam/learning-astro>
-
-<https://www.w3schools.com/js/js_date_methods.asp>
-
-<https://www.canada.ca/en/revenue-agency/services/tax/public-holidays.html>
+<https://astro-powered-calendar.surge.sh>
 
 ```bash
 npm install
@@ -14,6 +10,14 @@ npm run build
 npm run deploy
 # surge dist https://astro-powered-calendar.surge.sh
 ```
+
+## References
+
+<https://github.com/hchiam/learning-astro>
+
+<https://www.w3schools.com/js/js_date_methods.asp>
+
+<https://www.canada.ca/en/revenue-agency/services/tax/public-holidays.html>
 
 ## 🚀 Project Structure
 
