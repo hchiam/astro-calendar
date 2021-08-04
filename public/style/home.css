@@ -55,15 +55,30 @@ td {
   font-weight: bold;
   font-style: italic;
   color: lightgrey;
-  float: right;
   opacity: 0.5;
+  position: absolute;
+  right: 1px;
 }
 
 .first-day-of-month {
   outline: 2px solid;
+  position: relative;
 }
 
 .bubble {
   font-size: x-small;
   vertical-align: top;
+}
+
+.weekly-wednesdays {
+  display: block;
+  text-align: center;
+  font-size: 1em;
+}
+
+.weekly-wednesdays > .letter {
+  font-size: 0.7em;
+  vertical-align: 0rem;
+  text-decoration: underline overline 0.15em;
+  text-underline-offset: 0.15em;
 }

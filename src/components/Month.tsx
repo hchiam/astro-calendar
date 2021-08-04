@@ -1,4 +1,5 @@
 import Bubbles from "./Bubbles";
+import WeeklyWednesdays from "./WeeklyWednesdays";
 
 let iterator;
 
@@ -63,7 +64,7 @@ export default function Month(props) {
           </tr>
         </thead>
         <tbody>
-          {weeks.map((week) => {
+          {weeks.map((week, weekIndex) => {
             return (
               <tr key={generateNextID()}>
                 {week.map((date, i) => {
@@ -79,6 +80,18 @@ export default function Month(props) {
                       </span>
                     );
                   }
+
+                  const isWednesday = date.getDay() === 3;
+                  let wednesdayNote = <></>;
+                  if (isWednesday) {
+                    wednesdayNote = (
+                      <>
+                        <br />
+                        <WeeklyWednesdays date={date} />
+                      </>
+                    );
+                  }
+
                   return (
                     <td
                       className={dayOfMonth === 1 ? "first-day-of-month" : ""}
@@ -87,6 +100,7 @@ export default function Month(props) {
                       {dayOfMonth}&nbsp;
                       <Bubbles number={8} />
                       &nbsp;{monthText}
+                      {wednesdayNote}
                     </td>
                   );
                 })}
