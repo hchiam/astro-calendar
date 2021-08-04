@@ -16,7 +16,6 @@ export default function Calendar() {
         step="1"
         onChange={(e) => setNumberOfMonths(e.target.value)}
       /> */}
-
       <StatHolidaysWrapper>
         <Month
           firstDate={today}

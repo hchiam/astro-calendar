@@ -1,6 +1,7 @@
 import { useEffect, useContext } from "react";
 
 import Bubbles from "./Bubbles";
+import Circles from "./Circles";
 import WeeklyWednesdays from "./WeeklyWednesdays";
 import { generateNextID } from "../helpers/GenerateNextID";
 import { StatHolidaysContext, getStatHolidayName } from "./StatHolidays";
@@ -60,54 +61,63 @@ export default function Month(props) {
         </thead>
         <tbody>
           {weeks.map((week, weekIndex) => {
+            const hasSpacer = (weekIndex - 3) % 8 === 0;
             return (
-              <tr key={generateNextID()}>
-                {week.map((date, i) => {
-                  const dayOfMonth = date.getDate();
-                  let monthText = <></>;
-                  if (dayOfMonth === 1) {
-                    monthText = (
-                      <span className="month-text">
-                        {date
-                          .toLocaleString("default", { month: "short" })
-                          .replace(".", "")
-                          .toUpperCase()}
-                      </span>
+              <>
+                <tr key={generateNextID()}>
+                  {week.map((date, i) => {
+                    const dayOfMonth = date.getDate();
+                    let monthText = <></>;
+                    if (dayOfMonth === 1) {
+                      monthText = (
+                        <span className="month-text">
+                          {date
+                            .toLocaleString("default", { month: "short" })
+                            .replace(".", "")
+                            .toUpperCase()}
+                        </span>
+                      );
+                    }
+
+                    const isWednesday = date.getDay() === 3;
+                    let wednesdayNote = <></>;
+                    if (isWednesday) {
+                      wednesdayNote = (
+                        <>
+                          <br />
+                          <WeeklyWednesdays date={date} />
+                        </>
+                      );
+                    }
+
+                    const holidayName = getStatHolidayName(date, statHolidays);
+                    const holidayNote = holidayName ? (
+                      <span className="holiday-name">{holidayName}</span>
+                    ) : (
+                      <></>
                     );
-                  }
 
-                  const isWednesday = date.getDay() === 3;
-                  let wednesdayNote = <></>;
-                  if (isWednesday) {
-                    wednesdayNote = (
-                      <>
-                        <br />
-                        <WeeklyWednesdays date={date} />
-                      </>
+                    return (
+                      <td
+                        className={dayOfMonth === 1 ? "first-day-of-month" : ""}
+                        key={generateNextID()}
+                      >
+                        {dayOfMonth}&nbsp;
+                        <Bubbles number={8} />
+                        &nbsp;{monthText}
+                        {wednesdayNote}
+                        {holidayNote}
+                        <Circles />
+                      </td>
                     );
-                  }
-
-                  const holidayName = getStatHolidayName(date, statHolidays);
-                  const holidayNote = holidayName ? (
-                    <span className="holiday-name">{holidayName}</span>
-                  ) : (
-                    <></>
-                  );
-
-                  return (
-                    <td
-                      className={dayOfMonth === 1 ? "first-day-of-month" : ""}
-                      key={generateNextID()}
-                    >
-                      {dayOfMonth}&nbsp;
-                      <Bubbles number={8} />
-                      &nbsp;{monthText}
-                      {wednesdayNote}
-                      {holidayNote}
-                    </td>
-                  );
-                })}
-              </tr>
+                  })}
+                </tr>
+                {hasSpacer && (
+                  <tr key={generateNextID()}>
+                    <td colSpan={7}>Notes/Defer:</td>
+                  </tr>
+                )}
+              </>
             );
           })}
         </tbody>
