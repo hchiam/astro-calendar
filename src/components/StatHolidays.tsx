@@ -18,9 +18,9 @@ export default function StatHolidaysWrapper(props) {
         let holidays = res?.province?.holidays;
         if (holidays) {
           holidays = holidays.map((d) => {
-            const [year, month, date] = d.date.split("-");
+            const [year, month, date] = d.observedDate.split("-");
             const holiday: StatHoliday = {
-              date: new Date(year, month, date),
+              date: new Date(Number(year), Number(month) - 1, Number(date)),
               name: d.nameEn,
             };
             return holiday;

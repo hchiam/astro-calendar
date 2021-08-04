@@ -1,7 +1,7 @@
-export function sameDay(date1: Date, date2: Date): boolean {
+export function sameDay(dateFromAPI: Date, jsDate: Date): boolean {
   return (
-    date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate()
+    dateFromAPI.getFullYear() === jsDate.getFullYear() &&
+    dateFromAPI.getMonth() === jsDate.getMonth() + 1 &&
+    dateFromAPI.getDate() === jsDate.getDate()
   );
 }
