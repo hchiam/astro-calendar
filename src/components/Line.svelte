@@ -1,4 +1,4 @@
-<hr />
+<hr class="print-hide" />
 
 <style>
   hr {

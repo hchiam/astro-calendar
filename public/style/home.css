@@ -34,8 +34,14 @@ h3 {
 
 table {
   width: 100%;
-  border-collapse: collapse;
   table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+tr {
+  /* prevent page break inside when printing: */
+  page-break-inside: avoid;
 }
 
 td {
@@ -55,4 +61,14 @@ td {
 
 .first-day-of-month {
   outline: 2px solid;
+}
+
+@media print {
+  .print-hide {
+    display: none;
+  }
+}
+
+@page {
+  margin: 1rem;
 }

@@ -79,7 +79,7 @@ export default function Month(props) {
                   }
                   return (
                     <td
-                      className={dayOfMonth === 1 && "first-day-of-month"}
+                      className={dayOfMonth === 1 ? "first-day-of-month" : ""}
                       key={generateNextID()}
                     >
                       {dayOfMonth}&nbsp;{monthText}
