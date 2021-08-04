@@ -10,6 +10,8 @@
 npm install
 npm start
 # http://localhost:3000
+npm run build
+# surge dist https://astro-powered-calendar.surge.sh
 ```
 
 ## 🚀 Project Structure
