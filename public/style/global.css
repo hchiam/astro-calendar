@@ -56,8 +56,12 @@ a[target="_blank"]::after {
   .print-hide {
     display: none;
   }
-}
 
-@page {
-  margin: 1rem;
+  @page {
+    margin: 10px 0;
+  }
+
+  body {
+    margin: 1rem 0;
+  }
 }

@@ -77,9 +77,9 @@ td {
 
 .weekly-wednesdays > .letter {
   font-size: 0.7em;
-  vertical-align: 0rem;
-  text-decoration: underline overline 0.15em;
-  text-underline-offset: 0.15em;
+  border: 1px solid;
+  width: 20px;
+  display: inline-block;
 }
 
 .holiday-name {

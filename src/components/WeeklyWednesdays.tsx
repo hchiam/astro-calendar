@@ -17,8 +17,8 @@ export default function WeeklyWednesdays(props) {
 
   const isFive = diff % 14 !== 0;
   const isFour = diff % 14 === 0;
-  const isFiveText = addBrackets("TGRNF");
-  const isFourText = addBrackets("TRNF");
+  const isFiveText = wrapLetters("TGRNF");
+  const isFourText = wrapLetters("TRNF");
   if (isFive === true) {
     return (
       <span className="weekly-wednesdays" key={generateNextID()}>
@@ -36,16 +36,14 @@ export default function WeeklyWednesdays(props) {
   }
 }
 
-function addBrackets(string: string) {
+function wrapLetters(string: string) {
   return (
     <>
       {string.split("").map((letter) => (
         <>
-          {"["}
           <span className="letter" key={generateNextID()}>
             {letter}
           </span>
-          {"]"}
         </>
       ))}
     </>
