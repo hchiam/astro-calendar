@@ -56,13 +56,12 @@ td {
 }
 
 .month-text {
-  font-size: x-small;
+  font-size: 0.5em;
   font-weight: bold;
   font-style: italic;
-  color: lightgrey;
-  opacity: 0.5;
+  color: red;
   position: absolute;
-  right: 1px;
+  right: 2px;
 }
 
 .bubble {
