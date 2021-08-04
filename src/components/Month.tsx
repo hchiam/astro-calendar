@@ -1,3 +1,5 @@
+import Bubbles from "./Bubbles";
+
 let iterator;
 
 function generateNextID() {
@@ -82,7 +84,9 @@ export default function Month(props) {
                       className={dayOfMonth === 1 ? "first-day-of-month" : ""}
                       key={generateNextID()}
                     >
-                      {dayOfMonth}&nbsp;{monthText}
+                      {dayOfMonth}&nbsp;
+                      <Bubbles number={8} />
+                      &nbsp;{monthText}
                     </td>
                   );
                 })}

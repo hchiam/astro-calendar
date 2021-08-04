@@ -63,12 +63,7 @@ td {
   outline: 2px solid;
 }
 
-@media print {
-  .print-hide {
-    display: none;
-  }
-}
-
-@page {
-  margin: 1rem;
+.bubble {
+  font-size: x-small;
+  vertical-align: top;
 }
