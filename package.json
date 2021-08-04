@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "astro dev",
-    "build": "astro build"
+    "build": "astro build",
+    "deploy": "npm run build && surge dist https://astro-powered-calendar.surge.sh"
   },
   "devDependencies": {
     "astro": "^0.18.8",
