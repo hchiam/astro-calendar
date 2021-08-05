@@ -6,8 +6,8 @@ interface WeeklyWednesdays {
 
 export default function WeeklyWednesdays(props) {
   const { date } = props;
-  const isFourDateReference = new Date("2021-08-04T12:00:00.000Z");
-  const diff = Math.abs(getDayOfYear(date) - getDayOfYear(isFourDateReference));
+  const isFourDateReference = new Date("2021-08-04T04:00:00.000Z");
+  const diff = getDifferenceInTimeInDays(date, isFourDateReference);
   const isFour = diff === 0 || diff % 14 === 0;
   const isFive = diff % 14 !== 0;
   const isFourText = wrapLetters("TRNF");
@@ -43,10 +43,9 @@ function wrapLetters(string: string) {
   );
 }
 
-function getDayOfYear(date: Date): number {
-  const startOfYear = new Date(date.getFullYear(), 0, 0);
-  const diffInMilliseconds = date.getTime() - startOfYear.getTime();
+function getDifferenceInTimeInDays(date1: Date, date2: Date): number {
+  const diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
   const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
-  const dayOfYear = Math.floor(diffInMilliseconds / oneDayInMilliseconds);
-  return dayOfYear;
+  const days = Math.floor(diffInMilliseconds / oneDayInMilliseconds);
+  return days;
 }
