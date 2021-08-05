@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 
 import Bubbles from "./Bubbles";
 import Circles from "./Circles";
@@ -10,6 +10,7 @@ export default function Month(props) {
   const { firstDate, numberOfMonths } = props;
   const sundayThisWeek = new Date();
   sundayThisWeek.setDate(firstDate.getDate() - (firstDate.getDay() % 7));
+  sundayThisWeek.setHours(0, 0, 0, 0);
   const startMonthName = sundayThisWeek
     .toLocaleString("default", { month: "short" })
     .replace(".", "");
@@ -65,7 +66,7 @@ export default function Month(props) {
             return (
               <>
                 <tr key={generateNextID()}>
-                  {week.map((date, i) => {
+                  {week.map((date) => {
                     const dayOfMonth = date.getDate();
                     let monthText = <></>;
                     if (dayOfMonth === 1) {
