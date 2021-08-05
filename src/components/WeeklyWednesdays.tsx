@@ -6,29 +6,22 @@ interface WeeklyWednesdays {
 
 export default function WeeklyWednesdays(props) {
   const { date } = props;
-  const isFourDateReference = new Date("2021-08-04T00:00:00.000Z");
-  const diff = Math.round(
-    Math.abs(date.getTime() - isFourDateReference.getTime()) /
-      24 /
-      60 /
-      60 /
-      1000
-  );
-
+  const isFourDateReference = new Date("2021-08-04T12:00:00.000Z");
+  const diff = Math.abs(getDayOfYear(date) - getDayOfYear(isFourDateReference));
+  const isFour = diff === 0 || diff % 14 === 0;
   const isFive = diff % 14 !== 0;
-  const isFour = diff % 14 === 0;
-  const isFiveText = wrapLetters("TGRNF");
   const isFourText = wrapLetters("TRNF");
-  if (isFive === true) {
-    return (
-      <span className="weekly-wednesdays" key={generateNextID()}>
-        {isFiveText}
-      </span>
-    );
-  } else if (isFour === true) {
+  const isFiveText = wrapLetters("TGRNF");
+  if (isFour === true) {
     return (
       <span className="weekly-wednesdays" key={generateNextID()}>
         {isFourText}
+      </span>
+    );
+  } else if (isFive === true) {
+    return (
+      <span className="weekly-wednesdays" key={generateNextID()}>
+        {isFiveText}
       </span>
     );
   } else {
@@ -48,4 +41,12 @@ function wrapLetters(string: string) {
       ))}
     </>
   );
+}
+
+function getDayOfYear(date: Date): number {
+  const startOfYear = new Date(date.getFullYear(), 0, 0);
+  const diffInMilliseconds = date.getTime() - startOfYear.getTime();
+  const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+  const dayOfYear = Math.floor(diffInMilliseconds / oneDayInMilliseconds);
+  return dayOfYear;
 }
