@@ -8,26 +8,25 @@ import { StatHolidaysContext, getStatHolidayName } from "./StatHolidays";
 
 export default function Month(props) {
   const { firstDate, numberOfMonths } = props;
-  const sundayThisWeek = new Date();
+  const sundayThisWeek = new Date(); // today
   sundayThisWeek.setDate(firstDate.getDate() - (firstDate.getDay() % 7));
   sundayThisWeek.setHours(0, 0, 0, 0);
   const startMonthName = sundayThisWeek
     .toLocaleString("default", { month: "short" })
     .replace(".", "");
-  const dates = getNextMonth(sundayThisWeek, numberOfMonths);
+  const dates = getDates(sundayThisWeek, numberOfMonths);
   const weeks = getWeeks(dates);
+  const nthLastSunday = getNthLastSunday(sundayThisWeek, numberOfMonths, 4);
 
   const statHolidays = useContext(StatHolidaysContext);
 
-  function getNextMonth(
+  function getDates(
     startDateInclusive: Date,
     numberOfMonths: number = 1
   ): Date[] {
     const dates: Date[] = [];
-    const thisYear = startDateInclusive.getFullYear();
-    const thisMonth = startDateInclusive.getMonth() + numberOfMonths;
-    const lastDay = new Date(thisYear, thisMonth, 0);
-    let nextDate = startDateInclusive;
+    const lastDay = getLastDay(startDateInclusive, numberOfMonths);
+    let nextDate = cloneDate(startDateInclusive);
     dates.push(new Date(nextDate.getTime()));
     while (nextDate.getTime() < lastDay.getTime()) {
       nextDate.setDate(nextDate.getDate() + 1);
@@ -37,6 +36,20 @@ export default function Month(props) {
     return dates;
   }
 
+  function getLastDay(
+    startDateInclusive: Date,
+    numberOfMonths: number = 1
+  ): Date {
+    const thisYear = startDateInclusive.getFullYear();
+    const thisMonth = startDateInclusive.getMonth() + numberOfMonths;
+    const lastDay = new Date(thisYear, thisMonth, 0);
+    return lastDay;
+  }
+
+  function cloneDate(date: Date): Date {
+    return new Date(date.getTime());
+  }
+
   function getWeeks(dates: Date[]): Date[][] {
     const weeks: Date[][] = [];
     let chunk = 7;
@@ -44,6 +57,25 @@ export default function Month(props) {
       weeks.push(dates.slice(i, i + chunk));
     }
     return weeks;
+  }
+
+  function getNthLastSunday(
+    startDateInclusive: Date,
+    numberOfMonths: number = 1,
+    nthLast: number = 4
+  ): Date {
+    nthLast = Math.max(nthLast, 1);
+    const lastDay = getLastDay(startDateInclusive, numberOfMonths);
+    const sundayOfLastDay = cloneDate(lastDay);
+    sundayOfLastDay.setDate(lastDay.getDate() - (lastDay.getDay() % 7));
+    sundayOfLastDay.setHours(0, 0, 0, 0);
+    const nthLastSunday = cloneDate(sundayOfLastDay);
+    nthLastSunday.setDate(nthLastSunday.getDate() - 7 * (nthLast - 1));
+    return nthLastSunday;
+  }
+
+  function isNLastSunday(date: Date): boolean {
+    return date.getTime() === nthLastSunday.getTime();
   }
 
   return (
@@ -91,6 +123,16 @@ export default function Month(props) {
                       );
                     }
 
+                    let nthLastSundayNote = <></>;
+                    if (isNLastSunday(date)) {
+                      nthLastSundayNote = (
+                        <>
+                          <br />
+                          <div>print calendar?</div>
+                        </>
+                      );
+                    }
+
                     const holidayName = getStatHolidayName(date, statHolidays);
                     const holidayNote = holidayName ? (
                       <span className="holiday-name">{holidayName}</span>
@@ -107,6 +149,7 @@ export default function Month(props) {
                         <Bubbles number={8} />
                         &nbsp;{monthText}
                         {wednesdayNote}
+                        {nthLastSundayNote}
                         {holidayNote}
                         <Circles />
                       </td>
