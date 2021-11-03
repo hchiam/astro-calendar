@@ -6,7 +6,6 @@
 npm install
 npm start
 # http://localhost:3000
-npm run build
 npm run deploy
 # surge dist https://astro-powered-calendar.surge.sh
 ```
