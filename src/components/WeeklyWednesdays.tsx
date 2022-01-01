@@ -30,17 +30,11 @@ export default function WeeklyWednesdays(props) {
 }
 
 function wrapLetters(string: string) {
-  return (
-    <>
-      {string.split("").map((letter) => (
-        <>
-          <span className="letter" key={generateNextID()}>
-            {letter}
-          </span>
-        </>
-      ))}
-    </>
-  );
+  return string.split("").map((letter) => (
+    <span className="letter" key={generateNextID()}>
+      {letter}
+    </span>
+  ));
 }
 
 function getDifferenceInTimeInDays(date1: Date, date2: Date): number {

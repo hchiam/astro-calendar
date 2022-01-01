@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import Bubbles from "./Bubbles";
 import Circles from "./Circles";
@@ -96,7 +96,7 @@ export default function Month(props) {
           {weeks.map((week, weekIndex) => {
             const hasSpacer = (weekIndex - 3) % 8 === 0;
             return (
-              <>
+              <React.Fragment key={generateNextID()}>
                 <tr key={generateNextID()}>
                   {week.map((date) => {
                     const dayOfMonth = date.getDate();
@@ -161,7 +161,7 @@ export default function Month(props) {
                     <td colSpan={7}>Notes/Defer:</td>
                   </tr>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
         </tbody>

@@ -1,5 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
+import { generateNextID } from "../helpers/GenerateNextID";
+
 export const StatHolidaysContext = createContext();
 
 interface StatHolidays {
@@ -8,6 +10,7 @@ interface StatHolidays {
 
 export default function StatHolidaysWrapper(props) {
   const [statHolidays, setStatHolidays] = useState({});
+  const [gotError, setGotError] = useState(false);
   useEffect(() => {
     fetch("https://canada-holidays.ca/api/v1/provinces/ON")
       .then((res) => res.json())
@@ -26,11 +29,12 @@ export default function StatHolidaysWrapper(props) {
       })
       .catch((error) => {
         console.log(error);
+        setGotError(true);
       });
   }, []);
   return (
-    <StatHolidaysContext.Provider value={statHolidays}>
-      {Object.keys(statHolidays).length ? (
+    <StatHolidaysContext.Provider value={statHolidays} key={generateNextID()}>
+      {Object.keys(statHolidays).length || gotError ? (
         props.children
       ) : (
         <h2>Fetching holidays...</h2>
