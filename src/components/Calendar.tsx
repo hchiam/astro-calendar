@@ -6,7 +6,7 @@ import StatHolidaysWrapper from "../components/StatHolidays";
 
 export default function Calendar() {
   const today = new Date();
-  const [numberOfMonths, setNumberOfMonths] = useState(6);
+  const [numberOfMonths, setNumberOfMonths] = useState(12);
   return (
     <>
       {/* <input
