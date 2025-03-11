@@ -112,9 +112,25 @@ export default function Month(props) {
                       );
                     }
 
+                    const isMonday = date.getDay() === 1;
                     const isWednesday = date.getDay() === 3;
+                    const isFriday = date.getDay() === 5;
+
+                    let exerciseNote = '';
+                    if (isWednesday || isFriday){
+                      exerciseNote = 'E';
+                    }
+
+                    let circles = <Circles extraNote={exerciseNote} />;
+                    if (isMonday) {
+                      circles = <><p>〇 S{weekIndex%2===0&&' // L'}</p> <p>〇 E 〇 C 〇 W</p> <p>〇 M</p></>;
+                    } 
+
                     let wednesdayNote = <></>;
                     if (isWednesday) {
+                      circles = <>
+                        <p>〇{exerciseNote ? ' ' + exerciseNote:''}</p> <p>〇</p>
+                      </>;
                       wednesdayNote = (
                         <>
                           <br />
@@ -146,12 +162,12 @@ export default function Month(props) {
                         key={generateNextID()}
                       >
                         {dayOfMonth}&nbsp;
-                        <Bubbles number={8} />
+                        <Bubbles />
                         &nbsp;{monthText}
                         {wednesdayNote}
                         {nthLastSundayNote}
                         {holidayNote}
-                        <Circles />
+                        {circles}
                       </td>
                     );
                   })}

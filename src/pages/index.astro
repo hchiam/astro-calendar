@@ -1,36 +1,38 @@
 ---
 // server-side build JS/TS:
 
-import Heading from '../components/Heading.astro';
-import Calendar from '../components/Calendar.tsx';
-import Line from '../components/Line.svelte';
-import StatHolidaysLink from '../components/StatHolidaysLink.astro'
+import Heading from "../components/Heading.astro";
+import Calendar from "../components/Calendar.tsx";
+import Line from "../components/Line.svelte";
+import StatHolidaysLink from "../components/StatHolidaysLink.astro";
 
-const title: string = 'Astro-powered Calendar';
+const title: string = "Astro-powered Calendar";
 ---
 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="stylesheet" href="/style/global.css">
-    <link rel="stylesheet" href="/style/home.css">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style/global.css" />
+    <link rel="stylesheet" href="/style/home.css" />
 
     <style>
-        
+      main {
+        margin: 1rem;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <Heading/>
-        <Line/>
-        <Calendar client:visible/>
-        <br>
-        <h3>
-            <StatHolidaysLink/>
-        </h3>
+      <Heading />
+      <Line />
+      <Calendar client:visible />
+      <br />
+      <h3>
+        <StatHolidaysLink />
+      </h3>
     </main>
-</body>
+  </body>
 </html>
