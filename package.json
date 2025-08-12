@@ -8,9 +8,11 @@
     "build": "astro build",
     "deploy": "npm run build && surge dist https://astro-powered-calendar.surge.sh"
   },
-  "devDependencies": {
-    "astro": "^0.18.8",
-    "@astrojs/renderer-react": "^0.2.0",
-    "@astrojs/renderer-svelte": "^0.1.1"
+  "dependencies": {
+    "@astrojs/react": "4.3.0",
+    "@astrojs/svelte": "7.1.0",
+    "astro": "5.12.9",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   }
 }
