@@ -123,7 +123,7 @@ export default function Month(props) {
 
                     let circles = <Circles extraNote={exerciseNote} />;
                     if (isMonday) {
-                      circles = <><p>〇 S{weekIndex%2===0&&' // L'}</p> <p>〇 E 〇 C 〇 W</p> <p>〇 M</p></>;
+                      circles = <><p>〇 M</p><p>〇 {weekIndex%2===0&&'L // '}S</p> <p>〇 E 〇 C 〇 W</p></>;
                     } 
 
                     let wednesdayNote = <></>;
