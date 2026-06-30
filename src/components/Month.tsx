@@ -8,6 +8,7 @@ import { StatHolidaysContext, getStatHolidayName } from "./StatHolidays";
 
 export default function Month(props) {
   const { firstDate, numberOfMonths } = props;
+  const startYear = firstDate.getFullYear();
   const sundayThisWeek = new Date(); // today
   sundayThisWeek.setDate(firstDate.getDate() - (firstDate.getDay() % 7));
   sundayThisWeek.setHours(0, 0, 0, 0);
@@ -101,6 +102,7 @@ export default function Month(props) {
                   {week.map((date) => {
                     const dayOfMonth = date.getDate();
                     let monthText = <></>;
+                    let nextYearNote = <></>;
                     if (dayOfMonth === 1) {
                       monthText = (
                         <span className="month-text">
@@ -110,6 +112,13 @@ export default function Month(props) {
                             .toUpperCase()}
                         </span>
                       );
+                      if (date.getFullYear() > startYear) {
+                        nextYearNote = (
+                          <span className="holiday-name">
+                            check stat/public holidays in new year
+                          </span>
+                        );
+                      }
                     }
 
                     const isMonday = date.getDay() === 1;
@@ -164,6 +173,7 @@ export default function Month(props) {
                         {dayOfMonth}&nbsp;
                         <Bubbles />
                         &nbsp;{monthText}
+                        {nextYearNote}
                         {wednesdayNote}
                         {nthLastSundayNote}
                         {holidayNote}

@@ -86,8 +86,5 @@ td {
   display: block;
   font-size: x-small;
   opacity: 0.5;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   color: red;
 }
