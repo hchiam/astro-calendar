@@ -1,0 +1,95 @@
+---
+// fills a letter page: 2 columns x 18 weeks
+const columns: number = 2;
+const weeksPerColumn: number = 18;
+const daysPerColumn: number = weeksPerColumn * 7;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Streak Visual Reminder</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style/global.css" />
+
+    <style>
+      main {
+        margin: 1rem auto;
+        max-width: 40rem;
+      }
+      .write {
+        width: 6.6in;
+        max-width: 100%;
+        height: 1.25in;
+        margin: 0 auto 0.3in;
+        border: 2px solid currentColor;
+        border-radius: 0.25rem;
+      }
+      .columns {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.15in 0.6in;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(7, 0.3in);
+        gap: 0.15in;
+        justify-content: center;
+      }
+      .box {
+        width: 0.3in;
+        height: 0.3in;
+        border: 2px solid currentColor;
+        border-radius: 0.25rem;
+      }
+      .back {
+        margin-top: 1rem;
+        text-align: center;
+      }
+
+      @media print {
+        /* margin 0 drops browser header/footer text */
+        @page {
+          size: letter;
+          margin: 0;
+        }
+        body {
+          background: #fff;
+          color: #000;
+          padding: 0.5in;
+          min-height: 0;
+        }
+        main {
+          margin: 0 auto;
+          max-width: none;
+        }
+        .write,
+        .box {
+          border-color: #000;
+        }
+        .back {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="write" role="img" aria-label="Empty box for writing"></div>
+      <div class="columns">
+        {
+          Array.from({ length: columns }, () => (
+            <div class="grid">
+              {Array.from({ length: daysPerColumn }, () => (
+                <div class="box" />
+              ))}
+            </div>
+          ))
+        }
+      </div>
+      <p class="back"><a href="/">Back to calendar</a></p>
+    </main>
+  </body>
+</html>
